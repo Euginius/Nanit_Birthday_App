@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "NANIT"
+rootProject.name = "Nanit_App"
 include(":app")
  
