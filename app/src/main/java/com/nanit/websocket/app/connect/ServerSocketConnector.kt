@@ -19,15 +19,16 @@ class ServerSocketConnectorImpl : ServerSocketConnector {
     companion object {
         private const val SERVER_PATH = "nanit"
         private const val BIRTHDAY_COMMAND = "HappyBirthday"
+        private const val DEFAULT_TIMEOUT = 5L
     }
 
     private var currentWebSocket: WebSocket? = null
 
     // Create OkHttp client
     private val client = OkHttpClient.Builder()
-        .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(10, TimeUnit.SECONDS)
-        .writeTimeout(10, TimeUnit.SECONDS)
+        .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
         .build()
 
     override fun connectToServer(ipAddress: String, onResponseReceived: (ServerResult) -> Unit) {

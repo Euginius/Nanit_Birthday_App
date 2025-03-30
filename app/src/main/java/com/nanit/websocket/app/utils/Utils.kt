@@ -1,4 +1,4 @@
-package com.nanit.websocket.app
+package com.nanit.websocket.app.utils
 
 import android.util.Log
 import java.time.LocalDate

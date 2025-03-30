@@ -14,7 +14,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.nanit.websocket.app.R
-import com.nanit.websocket.app.Utils
+import com.nanit.websocket.app.utils.Utils
 import com.nanit.websocket.app.data.BirthdayInfo
 import com.nanit.websocket.app.ui.ThemedResources
 
@@ -33,13 +33,19 @@ fun BirthdayViewScreen(themedResources: ThemedResources ,birthdayInfo: BirthdayI
     ) {
 
         Column(modifier = Modifier.fillMaxSize()) {
-            Spacer(modifier = Modifier.fillMaxWidth().weight(topSectionFractionPercent))
-            BabyImageSection(modifier = Modifier.fillMaxWidth().weight(midSectionFractionPercent),
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .weight(topSectionFractionPercent))
+            BabyImageSection(modifier = Modifier
+                .fillMaxWidth()
+                .weight(midSectionFractionPercent),
                 themedResources,
                 imagePath,
                 onCameraClick
             )
-            Spacer(modifier = Modifier.fillMaxWidth().weight(bottomSectionFractionPercent))
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .weight(bottomSectionFractionPercent))
         }
         // Background image
         Image(
@@ -58,17 +64,21 @@ fun BirthdayViewScreen(themedResources: ThemedResources ,birthdayInfo: BirthdayI
             }
             // Top view
             AgeNameSection(
-                modifier = Modifier.fillMaxWidth().weight(topSectionFractionPercent),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(topSectionFractionPercent),
                 themedResources,
                 age.number,
                 birthdayInfo.name ?:"",
                 text
             )
-            Spacer(modifier = Modifier.fillMaxWidth().weight(midSectionFractionPercent))
+            Spacer(modifier = Modifier
+                .fillMaxWidth()
+                .weight(midSectionFractionPercent))
             // Bottom view
             ShareNewsSection(modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(bottomSectionFractionPercent),
+                .fillMaxWidth()
+                .weight(bottomSectionFractionPercent),
                 onShareButtonClick = onShareButtonClick)
         }
     }

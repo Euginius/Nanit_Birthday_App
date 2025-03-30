@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">NANIT</string>
-
+    <string name="app_name">Nanit Happy Birthday App</string>
 
 
     <!-- Birthday screen strings -->
@@ -10,5 +9,10 @@
     <string name="name_text">TODAY %s IS</string>
     <string name="share_button_title">Share the news</string>
 
+    <string name="ip_hint_title">Server IP address</string>
+    <string name="enter_ip_address_title">Enter server IP-address and press Connect</string>
+    <string name="connecting_title">Connecting…</string>
+    <string name="failed_to_connect_title">Failed to connect, check your ip address and try again</string>
+    <string name="no_data_title">No data available!</string>
 
 </resources>
