@@ -39,7 +39,7 @@ fun AgeNameSection(modifier: Modifier, theme: ThemedResources, ageNum: Int,name:
                 textAlign = TextAlign.Center,
                 color = Color.Black,
                 style = MaterialTheme.typography.labelLarge,
-                fontSize = 20.sp
+                fontSize = 22.sp
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -63,7 +63,7 @@ fun AgeNameSection(modifier: Modifier, theme: ThemedResources, ageNum: Int,name:
                 textAlign = TextAlign.Center,
                 text = dateText,
                 style = MaterialTheme.typography.labelLarge,
-                fontSize = 20.sp
+                fontSize = 22.sp
             )
         }
     }

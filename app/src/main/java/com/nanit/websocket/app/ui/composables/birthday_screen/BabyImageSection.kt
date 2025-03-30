@@ -2,6 +2,7 @@ package com.nanit.websocket.app.ui.composables.birthday_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -9,6 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -91,7 +95,12 @@ fun BabyImageSection(modifier :Modifier, theme: ThemedResources, imagePath : Str
                         }
                         .offset {IntOffset(imageSize.roundToPx(), -imageSize.roundToPx()) }
                         .rotate(-cameraIconClockWiseRotation)
-                        .clickable { onCameraClick.invoke()}
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = ripple(bounded = false, radius = imageSize) // New ripple API
+                        ) {
+                            onCameraClick.invoke()
+                        }
                 )
             }
         }
