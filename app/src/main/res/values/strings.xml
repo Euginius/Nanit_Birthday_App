@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">NANIT</string>
+
+
+
+    <!-- Birthday screen strings -->
+    <string name="month_old_text">MONTH OLD!</string>
+    <string name="year_old_text">YEAR OLD!</string>
+    <string name="years_old_text">YEARS OLD!</string>
+    <string name="name_text">TODAY %s IS</string>
+    <string name="share_button_title">Share the news</string>
+
+
 </resources>

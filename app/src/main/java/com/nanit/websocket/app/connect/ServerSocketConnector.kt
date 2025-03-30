@@ -1,6 +1,8 @@
 package com.nanit.websocket.app.connect
 
 import com.nanit.websocket.app.data.BirthdayInfo
+import com.nanit.websocket.app.data.ServerBirthdayInfo
+import com.nanit.websocket.app.data.toBirthdayInfo
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -46,8 +48,8 @@ class ServerSocketConnectorImpl : ServerSocketConnector {
             override fun onMessage(webSocket: WebSocket, text: String) {
                 try {
                     // Parse the received JSON using Kotlinx Serialization
-                    val birthdayInfo = Json.decodeFromString<BirthdayInfo>(text)
-                    onResponseReceived.invoke(ServerResult(Status.SUCCESS,birthdayInfo))
+                    val result = Json.decodeFromString<ServerBirthdayInfo>(text)
+                    onResponseReceived.invoke(ServerResult(Status.SUCCESS,result.toBirthdayInfo()))
                 } catch (e: Exception) {
                     onResponseReceived.invoke(ServerResult(Status.SUCCESS,null))
                 }

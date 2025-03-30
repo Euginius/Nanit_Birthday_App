@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.lifecycle.viewmodel.compose)
 
     //Ok http/retrofit/Serialization
     implementation(libs.okhttp)
@@ -54,7 +55,9 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.kotlin.serialization.json)
     implementation(libs.retrofit.serialization.converter)
-
+    //Image lib
+    implementation(libs.coil.compose)
+    implementation(libs.coil.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
