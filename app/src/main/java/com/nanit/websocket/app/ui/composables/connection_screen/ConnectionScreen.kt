@@ -69,7 +69,7 @@ fun ConnectionScreen(viewState: ViewState, viewModel: MainViewModel,prevIp: Stri
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Connect")
+                Text(stringResource(R.string.connect_button_title))
             }
 
             Spacer(modifier = Modifier.height(16.dp))

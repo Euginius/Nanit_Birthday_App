@@ -14,5 +14,6 @@
     <string name="connecting_title">Connecting…</string>
     <string name="failed_to_connect_title">Failed to connect, check your ip address and try again</string>
     <string name="no_data_title">No data available!</string>
+    <string name="connect_button_title">Connect</string>
 
 </resources>
