@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,15 +49,27 @@ fun AgeNameSection(modifier: Modifier, theme: ThemedResources, ageNum: Int,name:
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.left_swirls_icon),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxHeight().padding(end = 22.dp)
+                )
+
                 Image(
                     painter = painterResource(id = theme.getDrawableResourceForNum(ageNum)),
+                    contentDescription = "Age",
+                    modifier = Modifier.fillMaxHeight()
+                )
+
+                Image(
+                    painter = painterResource(id = R.drawable.right_swirls_icon),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxHeight().fillMaxWidth()
+                    modifier = Modifier.fillMaxHeight().padding(start = 22.dp)
                 )
             }
 
             Spacer(modifier = Modifier.height(12.dp))
-
 
             Text(
                 modifier = Modifier.fillMaxWidth(),
