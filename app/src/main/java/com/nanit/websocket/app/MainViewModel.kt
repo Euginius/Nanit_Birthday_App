@@ -70,7 +70,7 @@ class MainViewModel(private val serverConnector: ServerSocketConnector, private 
     fun saveImage(uri: Uri) {
         viewModelScope.launch {
             val savedImage =  imageStore.addImage(uri)
-            savedImage?.let {  _imageState.value = savedImage }
+            savedImage?.let {  _imageState.value = it }
         }
     }
 }

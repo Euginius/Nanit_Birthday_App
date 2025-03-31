@@ -2,32 +2,42 @@ package com.nanit.websocket.app.helpers
 
 import android.content.Context
 import android.net.Uri
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
-class PictureManager(private val context: Context) : ImageStorage {
+class PictureManager(private val context: Context,private val dataStore: DataStore<Preferences>) : ImageStorage {
 
-    // Define a fixed file name for the image in internal storage
-    private val imageFile: File = File(context.filesDir, "stored_image.jpg")
+    companion object {
+        private val IMAGE_PATH_KEY = stringPreferencesKey("image_path")
+    }
 
-    // Add a new image to internal storage (replaces the existing image)
+    // Add a new image (removes the old one and saves the new one with a timestamp)
     override fun addImage(imageUri: Uri): String? {
         return try {
-            // Open an InputStream to read the image from the URI
+            // Generate a timestamped filename
+            val timestamp = System.currentTimeMillis()
+            val imageFile = File(context.filesDir, "stored_image_$timestamp.jpg")
+
+            // Remove old image if it exists
+            removeImage()
+
+            // Save the new image
             val inputStream: InputStream? = context.contentResolver.openInputStream(imageUri)
-
-            // Open an OutputStream to write the image to internal storage
-            val outputStream: OutputStream = context.openFileOutput(imageFile.name, Context.MODE_PRIVATE)
-
-            // Copy the image data from the InputStream to the OutputStream (this will replace the existing image)
+            val outputStream: OutputStream = imageFile.outputStream()
             inputStream?.copyTo(outputStream)
-
-            // Close the streams
             outputStream.close()
             inputStream?.close()
 
-            // Return the saved image file
+            // Store the new image path
+            saveImagePath(imageFile.absolutePath)
+
             imageFile.absolutePath
         } catch (e: Exception) {
             null
@@ -36,12 +46,35 @@ class PictureManager(private val context: Context) : ImageStorage {
 
     // Remove the stored image from internal storage
     override fun removeImage(): Boolean {
-        return imageFile.exists() && imageFile.delete()
+        val lastImagePath = getImage()
+        return if (lastImagePath != null) {
+            val file = File(lastImagePath)
+            if (file.exists()) file.delete()
+            saveImagePath(null)
+            true
+        } else {
+            false
+        }
     }
 
-    // Retrieve the saved image from internal storage
+    // Retrieve the saved image path from DataStore
     override fun getImage(): String? {
-        return if (imageFile.exists()) imageFile.absolutePath else null
+        return runBlocking {
+            dataStore.data.first()[IMAGE_PATH_KEY]
+        }
+    }
+
+    // Save the image path to DataStore
+    private fun saveImagePath(path: String?) {
+        runBlocking {
+            dataStore.edit { preferences ->
+                if (path == null) {
+                    preferences.remove(IMAGE_PATH_KEY)
+                } else {
+                    preferences[IMAGE_PATH_KEY] = path
+                }
+            }
+        }
     }
 }
 

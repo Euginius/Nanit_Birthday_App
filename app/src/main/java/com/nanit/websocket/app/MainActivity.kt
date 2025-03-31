@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nanit.websocket.app.connect.ServerSocketConnectorImpl
 import com.nanit.websocket.app.data.IpStore
@@ -37,13 +38,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private val dataStore by preferencesDataStore(name = "app_store")
     private var viewModel : MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val factory = GenericViewModelFactory { MainViewModel(ServerSocketConnectorImpl(),PictureManager( this),IpStoreImpl(this)) }
+        val factory = GenericViewModelFactory { MainViewModel(ServerSocketConnectorImpl(),PictureManager( this,dataStore),IpStoreImpl(dataStore)) }
 
         setContent {
             NanitTheme {
